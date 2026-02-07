@@ -1,7 +1,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-class CapcputDownloader {
+class CapcutDownloader {
     constructor(url) {
         this.url = url;
     };
@@ -39,4 +39,4 @@ class CapcputDownloader {
     }
 };
 
-module.exports = CapcputDownloader;
+module.exports = CapcutDownloader;
