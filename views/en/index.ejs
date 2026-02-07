@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>WebDL - <%= locals.title %> By <%= locals.owner %></title>
+  <meta property="og:image" content="/img/logo-xvann.png" />
+  <link rel="icon" href="/img/logo-xvann.png" type="image/png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body class="bg-gray-900 text-white">
+  <header class="bg-gray-800 p-4 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <img alt="Cloud download icon" class="w-10 h-10" height="40" src="/img/logo-xvann.png" width="40"/>
+      <div>
+        <h1 class="text-xl font-bold text-blue-400"><%= locals.title %></h1>
+        <p id="title-nav" class="text-white">Media Downloader</p>
+      </div>
+    </div>
+    <nav class="hidden md:flex space-x-3 items-center">
+      <a class="text-blue-400 hover:underline" href="#about">About</a>
+      <a class="text-blue-400 hover:underline" href="#supported-platforms">Supported Platforms</a>
+      <a class="text-blue-400 hover:underline" href="#why-choose">Why Choose <%= locals.title %>?</a>
+      <a class="text-blue-400 hover:underline" href="https://t.me/xvannn07">Contact</a>
+      <button onclick="toggleTheme()" class="ml-2">
+        <i id="theme-icon" class="fas fa-moon text-blue-400"></i>
+      </button>
+      <!-- Language Dropdown (Desktop) -->
+      <div class="relative inline-block text-left">
+        <button id="lang-button" class="inline-flex items-center justify-center px-4 py-2 bg-gray-700 text-gray-300 hover:text-white rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+          Language
+          <svg class="ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+        <!-- Dropdown Menu -->
+        <div id="lang-dropdown" class="hidden origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+          <div class="py-1">
+            <a href="/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">English</a>
+            <a href="/id" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Indonesian</a>
+            <a href="/spa" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Spanish</a>
+          </div>
+        </div>
+      </div>
+      <!-- End of Language Dropdown (Desktop) -->
+    </nav>
+
+    <div class="md:hidden flex items-center">
+      <i id="theme-icon-mobile" class="fas fa-moon text-blue-400 mr-4" onclick="toggleTheme()"></i>
+      <i class="fas fa-bars text-blue-400" onclick="toggleMenu()"></i>
+    </div>
+  </header>
+  <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 p-4">
+    <a class="block text-blue-400 hover:underline py-2" href="#about">About</a>
+    <a class="block text-blue-400 hover:underline py-2" href="#supported-platforms">Supported Platforms</a>
+    <a class="block text-blue-400 hover:underline py-2" href="#why-choose">Why Choose <%= locals.title %>?</a>
+    <a class="block text-blue-400 hover:underline py-2" href="https://t.me/xvannn07">Contact</a>
+    <!-- Language Dropdown (Mobile) -->
+    <div class="relative inline-block text-left">
+      <button id="lang-button-mobile" class="inline-flex items-center justify-center px-4 py-2 bg-gray-700 text-gray-300 hover:text-white rounded w-full">
+        Language
+        <svg class="ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+      <!-- Dropdown Menu -->
+      <div id="lang-dropdown-mobile" class="hidden origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+        <div class="py-1">
+          <a href="/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">English</a>
+          <a href="/id" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Indonesian</a>
+          <a href="/spa" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Spanish</a>
+        </div>
+      </div>
+    </div>
+    <!-- End of Language Dropdown (Mobile) -->
+  </nav>
+
+  <main class="flex flex-col items-center mt-16 px-4">
+    <h2 class="text-3xl md:text-5xl font-bold text-blue-400 text-center">All-in-One Media Downloader</h2>
+    <p class="mt-4 text-lg md:text-xl text-gray-400 text-center">Download media from various social media platforms with ease.</p>
+    <form id="download-form" class="mt-8 w-full max-w-md">
+      <div class="bg-gray-800 p-4 rounded-lg flex items-center space-x-2">
+        <i class="fas fa-link text-gray-400"></i>
+        <input class="bg-transparent text-gray-400 w-full focus:outline-none" id="url-input" placeholder="Input Url here" type="url" required/>
+        <button class="text-gray-400 hover:text-white" onclick="pasteUrl()">
+          <i class="fas fa-paste"></i>
+        </button>
+      </div>
+      <button type="submit" class="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg flex items-center justify-center space-x-2">
+        <i class="fas fa-download"></i>
+        <span>Download</span>
+      </button>
+    </form>
+    <div class="mt-8 hidden flex flex-col items-center" id="loading">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-spinner fa-spin text-4xl text-blue-400"></i>
+        <p class="mt-4 text-lg text-gray-400">Processing your video...</p>
+      </div>
+    </div>
+    <div class="mt-8 hidden w-full max-w-md bg-gray-800 p-4 rounded-lg" id="result">
+      <!-- download disini -->
+    </div>
+    <section id="about" class="mt-16 w-full max-w-4xl text-center">
+      <h3 class="text-2xl md:text-3xl font-bold text-blue-400">About <%= locals.title %></h3>
+      <p class="mt-4 text-lg md:text-xl text-gray-400"><%= locals.title %> is a powerful tool that allows you to download media from various social media platforms effortlessly. Whether it's videos, images, or other media types, WebDL makes it easy and fast.</p>
+    </section>
+    <section id="supported-platforms" class="mt-16 w-full max-w-4xl text-center">
+      <h3 class="text-2xl md:text-3xl font-bold text-blue-400">Supported Platforms</h3>
+      <div id="platforms-container" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Elemen platform akan dimuat dari file JSON -->
+        <script>
+          fetch('/data/platforms.json')
+          .then(response => response.json())
+          .then(data => {
+            const container = document.getElementById('platforms-container');
+            data.forEach(platform => {
+              const platformDiv = document.createElement('div');
+              platformDiv.className = 'bg-gray-800 p-4 rounded-lg flex flex-col items-center';
+              platformDiv.innerHTML = `
+              <img src="${platform.icon}" alt="${platform.name} icon" class="w-10 h-10 object-contain"/>
+              <span class="mt-2 text-gray-400">${platform.name}</span>
+              `;
+              container.appendChild(platformDiv);
+            });
+          }).catch(error => console.error('Error loading platforms:', error));
+        </script>
+      </div>
+    </section>    
+    <section id="why-choose" class="mt-16 w-full max-w-4xl text-center">
+      <h3 class="text-2xl md:text-3xl font-bold text-blue-400">Why <%= locals.title %>?</h3>
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-gray-800 p-4 rounded-lg flex flex-col items-center">
+          <i class="fas fa-bolt text-4xl text-blue-400"></i>
+          <h4 class="mt-2 text-xl font-bold text-gray-400">Powerful</h4>
+          <p class="mt-2 text-gray-400"><%= locals.title %> offers a powerful and efficient way to download media from various platforms.</p>
+        </div>
+        <div class="bg-gray-800 p-4 rounded-lg flex flex-col items-center">
+          <i class="fas fa-dollar-sign text-4xl text-blue-400"></i>
+          <h4 class="mt-2 text-xl font-bold text-gray-400">Free</h4>
+          <p class="mt-2 text-gray-400">Enjoy all the features of <%= locals.title %> without any cost. It's completely free to use.</p>
+        </div>
+        <div class="bg-gray-800 p-4 rounded-lg flex flex-col items-center">
+          <i class="fas fa-clock text-4xl text-blue-400"></i>
+          <h4 class="mt-2 text-xl font-bold text-gray-400">24/7 Availability</h4>
+          <p class="mt-2 text-gray-400"><%= locals.title %> is available 24/7, so you can download your favorite media anytime you want.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-gray-800 p-4 mt-16 w-full text-center">
+    <p class="text-gray-400">&copy; 2025 WebDL. All rights reserved.</p>
+    <div class="mt-4 flex justify-center space-x-4">
+      <a class="text-blue-400 hover:underline" href="https://github.com/Xvannn07">Github</a>
+      <a class="text-blue-400 hover:underline" href="https://instagram.com/Xvannn07">Instagarm</a>
+      <a class="text-blue-400 hover:underline" href="https://t.me/Xvannn07">Contact Us</a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="/js/function.js"></script>
+  <script src="/js/script.js"></script>
+</body>
+</html>

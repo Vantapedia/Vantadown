@@ -1,0 +1,11 @@
+[
+    { "index": 0, "name": "TikTok", "icon": "/img/icons/tiktok.png" },
+    { "index": 1, "name": "Instagram Reels", "icon": "/img/icons/instagram.png" },
+    { "index": 2, "name": "Facebook", "icon": "/img/icons/facebook.png" },
+    { "index": 3, "name": "Spotify", "icon": "/img/icons/spotify.png" },
+    { "index": 4, "name": "Youtube", "icon": "/img/icons/youtube.png" },
+    { "index": 5, "name": "SoundCloud", "icon": "/img/icons/soundcloud.png" },
+    { "index": 6, "name": "Pinterest", "icon": "/img/icons/pinterest.png" },
+    { "index": 7, "name": "Capcut", "icon": "/img/icons/capcut.png" }
+]
+  
