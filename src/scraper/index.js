@@ -8,7 +8,7 @@ const SpotifyDownloader = require('./spotify.js');
 const YoutubeDownloader = require('./youtube.js');
 const SoundCloudDownloader = require('./soundcloud.js');
 const CapcutDownloader = require('./capcut.js');
-const PinterestDownloader = require('pinterest.js');
+const PinterestDownloader = require('./pinterest.js');
 const platformPatterns = require('../system/patterns.js');
 
 
