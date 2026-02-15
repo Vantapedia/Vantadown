@@ -107,6 +107,55 @@ class ElstyDownloader {
 
   async download() {
     try {
+      const responseFetch = await fetch(
+        `https://api.snowping.my.id/api/downloader/instagram?url=${encodeURIComponent(this.url)}`
+      );
+
+      const response = await responseFetch.json();
+
+      if (response.success) {
+        if (response.data.images.length > 0 && !response.data.videos.length > 0) {
+          return {
+            status: "success",
+            slide: true,
+            video: false,
+            table: false,
+            data: {
+              title: response.data.title,
+              download: response.data.images.map((v) => {
+                return { ext: "png", url: v.url };
+              }),
+            }
+          };
+        } else if (response.data.videos.length > 0) {
+          return {
+            status: "success",
+            slide: true,
+            video: false,
+            table: false,
+            data: {
+              title: response.data.title,
+              download: response.data.videos.map((v) => {
+                return { ext: "mp4", url: v.url };
+              }),
+            }
+          };
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      throw new Error('Gagal mengunduh dari Instagram: ' + error.message);
+    }
+  }
+}
+
+/*class ElstyDownloader {
+  constructor(url) {
+    this.url = url;
+  }
+
+  async download() {
+    try {
       const response = await callAPI(
         "elsty",
         "/api/download/social",
@@ -153,7 +202,7 @@ class ElstyDownloader {
         throw new Error('Gagal mengunduh dari Instagram: ' + error.message);
     }
   }
-}
+}*/
 
 class InstagramDownloader {
   constructor(url) {
