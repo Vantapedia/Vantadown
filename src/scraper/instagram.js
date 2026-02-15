@@ -107,102 +107,53 @@ class ElstyDownloader {
 
   async download() {
     try {
-      const responseFetch = await fetch(
+      const res = await fetch(
         `https://api.snowping.my.id/api/downloader/instagram?url=${encodeURIComponent(this.url)}`
       );
 
-      const response = await responseFetch.json();
+      const response = await res.json();
 
-      if (response.success) {
-        if (response.data.images.length > 0 && !response.data.videos.length > 0) {
-          return {
-            status: "success",
-            slide: true,
-            video: false,
-            table: false,
-            data: {
-              title: response.data.title,
-              download: response.data.images.map((v) => {
-                return { ext: "png", url: v.url };
-              }),
-            }
-          };
-        } else if (response.data.videos.length > 0) {
-          return {
-            status: "success",
-            slide: true,
-            video: false,
-            table: false,
-            data: {
-              title: response.data.title,
-              download: response.data.videos.map((v) => {
-                return { ext: "mp4", url: v.url };
-              }),
-            }
-          };
-        }
+      if (response.status !== 200 || !response.result) {
+        throw new Error("API gagal memproses URL");
       }
+
+      const data = response.result;
+
+      if (data.images && data.images.length > 0) {
+        return {
+          status: "success",
+          slide: true,
+          video: false,
+          table: false,
+          data: {
+            title: data.username || "Instagram Post",
+            download: data.images.map((v) => {
+              return { ext: "png", url: v };
+            }),
+          },
+        };
+      }
+
+      if (data.video_url) {
+        return {
+          status: "success",
+          slide: false,
+          video: true,
+          table: false,
+          data: {
+            title: data.username || "Instagram Video",
+            download: [{ ext: "mp4", url: data.video_url }],
+          },
+        };
+      }
+
+      throw new Error("Media tidak ditemukan");
     } catch (error) {
       console.error(error);
-      throw new Error('Gagal mengunduh dari Instagram: ' + error.message);
+      throw new Error("Gagal mendapatkan hasil download");
     }
   }
 }
-
-/*class ElstyDownloader {
-  constructor(url) {
-    this.url = url;
-  }
-
-  async download() {
-    try {
-      const response = await callAPI(
-        "elsty",
-        "/api/download/social",
-        "GET",
-        {
-          query: {
-            url: this.url,
-          },
-          useApiKey: false,
-        }
-      );
-      
-      if (response.success) {
-        if(response.data.images.length > 0 && !response.data.videos.length > 0) {
-          return {
-            status: "success",
-            slide: true,
-            video: false,
-            table: false,
-            data: {
-              title: response.data.title,
-              download: response.data.images.map((v) => {
-                return { ext: "png", url: v.url };
-              }),
-            }
-          };
-        } else if(response.data.videos.length > 0) {
-          return {
-            status: "success",
-            slide: true,
-            video: false,
-            table: false,
-            data: {
-              title: response.data.title,
-              download: response.data.videos.map((v) => {
-                return { ext: "mp4", url: v.url };
-              }),
-            }
-          };
-        }
-      }
-    } catch(error) {
-      console.error(error);
-        throw new Error('Gagal mengunduh dari Instagram: ' + error.message);
-    }
-  }
-}*/
 
 class InstagramDownloader {
   constructor(url) {
