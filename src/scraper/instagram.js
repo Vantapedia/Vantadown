@@ -2,7 +2,7 @@ const axios = require("axios");
 const crypto = require("crypto");
 const { callAPI } = require("../../setting.js");
 
-class FastDownloader {
+/*class FastDownloader {
   constructor(url) {
     this.url = url;
   }
@@ -98,9 +98,9 @@ class FastDownloader {
     }
     
   }
-}
+}*/
 
-class ElstyDownloader {
+class InstagramDownloader {
   constructor(url) {
     this.url = url;
   }
@@ -163,7 +163,7 @@ class ElstyDownloader {
   }
 }
 
-class InstagramDownloader {
+/*class InstagramDownloader {
   constructor(url) {
       this.url = url;
   }
@@ -184,6 +184,6 @@ class InstagramDownloader {
           }
       }
   }
-}
+}*/
 
 module.exports = InstagramDownloader;
