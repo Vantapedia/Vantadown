@@ -118,7 +118,7 @@ class InstagramDownloader {
           useApiKey: false,
         }
       );
-
+      
       if (response.success) {
         if(response.data.images.length > 0 && !response.data.videos.length > 0) {
           return {
@@ -151,6 +151,7 @@ class InstagramDownloader {
     } catch(error) {
       console.error(error);
         throw new Error('Gagal mengunduh dari Instagram: ' + error.message);
+    }
   }
 }
 
