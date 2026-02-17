@@ -6,7 +6,8 @@ const info = {
 };
 
 const APIs = {
-  elsty: 'https://api.snowping.my.id'
+  elsty: 'https://api.sawit.biz.id' 
+//'https://api.snowping.my.id'
 };
 
 const APIKeys = {
