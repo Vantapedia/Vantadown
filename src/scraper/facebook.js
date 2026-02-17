@@ -1,4 +1,5 @@
-const axios = require('axios');
+const axios = require("axios");
+const { callAPI } = require("../../setting.js");
 
 class FacebookDownloader {
   constructor(url) {
