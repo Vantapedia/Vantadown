@@ -109,7 +109,7 @@ class InstagramDownloader {
     try {
       const response = await callAPI(
         "elsty",
-        "/api/downloader/instagram",
+        "/api/v1/download/instagram",
         "GET",
         {
           query: {
