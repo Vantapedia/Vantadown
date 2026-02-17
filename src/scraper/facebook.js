@@ -9,7 +9,7 @@ class FacebookDownloader {
     try {
       const response = await callAPI(
         "elsty",
-        "/api/v1/download/instagram",
+        "/api/v1/download/facebook",
         "GET",
         {
           query: {
