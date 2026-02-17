@@ -107,7 +107,7 @@ class InstagramDownloader {
 
   async download() {
     try {
-      const res = await await callAPI(
+      const response = await callAPI(
         "elsty",
         "/api/downloader/instagram",
         "GET",
@@ -118,8 +118,6 @@ class InstagramDownloader {
           useApiKey: false,
         }
       );
-
-      const response = await res.json();
 
       if (response.status !== 200 || !response.result) {
         throw new Error("API gagal memproses URL");
