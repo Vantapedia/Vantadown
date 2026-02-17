@@ -1,16 +1,16 @@
 const axios = require('axios');
 
 const info = {
-  title: "Web Down", // judul web
-  owner: "Ekspann" // nama kamu
+  title: "Web Downloader", // judul web
+  owner: "Vantapedia" // nama kamu
 };
 
 const APIs = {
-  elsty: 'https://elsty.xyz'
+  elsty: 'https://api.snowping.my.id'
 };
 
 const APIKeys = {
-    'https://elsty.xyz': null,
+    'https://api.snowping.my.id': null,
 };
 
 const callAPI = async (name, path = '/', method = 'GET', options = {}) => {
