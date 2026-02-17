@@ -107,8 +107,16 @@ class ElstyDownloader {
 
   async download() {
     try {
-      const res = await fetch(
-        `https://api.snowping.my.id/api/downloader/instagram?url=${encodeURIComponent(this.url)}`
+      const res = await await callAPI(
+        "elsty",
+        "/api/downloader/instagram",
+        "GET",
+        {
+          query: {
+            url: this.url,
+          },
+          useApiKey: false,
+        }
       );
 
       const response = await res.json();
